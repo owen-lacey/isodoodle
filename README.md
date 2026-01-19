@@ -15,7 +15,7 @@ import { isodoodle } from 'isodoodle';
 
 // Draw an isometric diamond
 const svg = isodoodle({ scale: 20, stroke: '#333' })
-  .ne(2).se(2).sw(2).nw(2).close()
+  .ne(2).se(2).sw(2).nw(2)
   .toSvgString();
 
 // Insert into DOM
@@ -38,6 +38,8 @@ Creates a new IsoDoodle instance.
 |--------|------|---------|-------------|
 | `scale` | number | 20 | Pixels per unit |
 | `stroke` | string | '#000' | Stroke color |
+| `strokeLinecap` | 'butt' \| 'round' \| 'square' | 'round' | Stroke linecap |
+| `strokeLinejoin` | 'miter' \| 'round' \| 'bevel' | 'round' | Stroke linejoin |
 | `strokeWidth` | number | 1 | Stroke width |
 | `fill` | string | 'none' | Fill color |
 | `width` | number | auto | SVG width |
@@ -58,7 +60,6 @@ All direction methods accept an optional `distance` parameter (default: 1).
 ### Path Control
 
 - `.moveTo(x, y)` - Jump to position without drawing (in scaled units)
-- `.close()` - Close current path
 - `.path(options?)` - Start new path with optional style overrides
 
 ### Output Methods
@@ -75,15 +76,15 @@ All direction methods accept an optional `distance` parameter (default: 1).
 const cube = isodoodle({ scale: 30, stroke: '#333' })
   // Top face
   .moveTo(0, 0)
-  .ne(2).se(2).sw(2).nw(2).close()
+  .ne(2).se(2).sw(2).nw(2)
   // Left face
   .path({ fill: '#ccc' })
   .moveTo(0, 0)
-  .nw(2).s(2).se(2).n(2).close()
+  .nw(2).s(2).se(2).n(2)
   // Right face
   .path({ fill: '#999' })
   .moveTo(0, 0)
-  .ne(2).s(2).sw(2).n(2).close()
+  .ne(2).s(2).sw(2).n(2)
   .toSvgString();
 ```
 
@@ -91,10 +92,21 @@ const cube = isodoodle({ scale: 30, stroke: '#333' })
 
 ```typescript
 const shapes = isodoodle({ scale: 20 })
-  .ne(1).se(1).sw(1).nw(1).close()
-  .path({ stroke: 'red' })
+  .ne(1).se(1).sw(1).nw(1)
+  .path({ stroke: 'red', strokeLinecap: 'square', strokeLinejoin: 'bevel' })
   .moveTo(3, 0)
-  .ne(1).se(1).sw(1).nw(1).close()
+  .ne(1).se(1).sw(1).nw(1)
+  .toSvgString();
+```
+
+### Stroke Linecaps
+
+```typescript
+const caps = isodoodle({ scale: 20, strokeLinecap: 'round', strokeLinejoin: 'round' })
+  .ne(1).se(1).sw(1).nw(1)
+  .path({ strokeLinecap: 'butt', strokeLinejoin: 'miter' })
+  .moveTo(3, 0)
+  .ne(1).se(1).sw(1).nw(1)
   .toSvgString();
 ```
 

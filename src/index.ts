@@ -26,6 +26,10 @@ export interface IsoDoodleOptions {
   scale?: number;
   /** Stroke color (default: '#000') */
   stroke?: string;
+  /** Stroke linecap (default: 'round') */
+  strokeLinecap?: 'butt' | 'round' | 'square';
+  /** Stroke linejoin (default: 'round') */
+  strokeLinejoin?: 'miter' | 'round' | 'bevel';
   /** Stroke width (default: 1) */
   strokeWidth?: number;
   /** Fill color (default: 'none') */
@@ -40,6 +44,8 @@ export interface IsoDoodleOptions {
 
 export interface PathOptions {
   stroke?: string;
+  strokeLinecap?: 'butt' | 'round' | 'square';
+  strokeLinejoin?: 'miter' | 'round' | 'bevel';
   strokeWidth?: number;
   fill?: string;
 }
@@ -73,6 +79,8 @@ export class IsoDoodle {
     this.options = {
       scale: options.scale ?? 20,
       stroke: options.stroke ?? '#000',
+      strokeLinecap: options.strokeLinecap ?? 'round',
+      strokeLinejoin: options.strokeLinejoin ?? 'round',
       strokeWidth: options.strokeWidth ?? 1,
       fill: options.fill ?? 'none',
       padding: options.padding ?? 10,
@@ -84,6 +92,8 @@ export class IsoDoodle {
       segments: [],
       options: {
         stroke: this.options.stroke,
+        strokeLinecap: this.options.strokeLinecap,
+        strokeLinejoin: this.options.strokeLinejoin,
         strokeWidth: this.options.strokeWidth,
         fill: this.options.fill,
       },
@@ -175,12 +185,6 @@ export class IsoDoodle {
     return this;
   }
 
-  /** Close current path */
-  close(): this {
-    this.currentPath.segments.push({ type: 'Z' });
-    return this;
-  }
-
   /** Start a new path with optional style overrides */
   path(options?: PathOptions): this {
     // Save current path if it has content
@@ -192,6 +196,8 @@ export class IsoDoodle {
       segments: [],
       options: {
         stroke: options?.stroke ?? this.options.stroke,
+        strokeLinecap: options?.strokeLinecap ?? this.options.strokeLinecap,
+        strokeLinejoin: options?.strokeLinejoin ?? this.options.strokeLinejoin,
         strokeWidth: options?.strokeWidth ?? this.options.strokeWidth,
         fill: options?.fill ?? this.options.fill,
       },
@@ -245,7 +251,7 @@ export class IsoDoodle {
             y: seg.y !== undefined ? seg.y + offsetY : undefined,
           }))
         );
-        return `  <path d="${d}" stroke="${p.options.stroke}" stroke-width="${p.options.strokeWidth}" fill="${p.options.fill}" />`;
+        return `  <path d="${d}" stroke="${p.options.stroke}" stroke-linecap="${p.options.strokeLinecap}" stroke-linejoin="${p.options.strokeLinejoin}" stroke-width="${p.options.strokeWidth}" fill="${p.options.fill}" />`;
       })
       .join('\n');
 
