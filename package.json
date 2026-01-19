@@ -1,6 +1,6 @@
 {
   "name": "isodoodle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A minimal TypeScript library for drawing SVGs on an isometric grid",
   "type": "module",
   "main": "./dist/index.js",
@@ -25,6 +25,14 @@
     "graphics",
     "typescript"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owen-lacey/isodoodle.git"
+  },
+  "homepage": "https://isodoodle.netlify.app",
+  "bugs": {
+    "url": "https://github.com/owen-lacey/isodoodle/issues"
+  },
   "author": "owen-lacey",
   "license": "MIT",
   "devDependencies": {
