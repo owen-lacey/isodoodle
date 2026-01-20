@@ -2,7 +2,7 @@
 
 **Draw isometric graphics with code.**
 
-<a href="https://isodoodle.netlify.app" target="_blank" rel="noopener noreferrer">💻 **Try the online editor →**</a>
+💻 <a href="https://isodoodle.netlify.app" target="_blank" rel="noopener noreferrer">**Try the online editor →**</a>
 
 ---
 
