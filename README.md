@@ -21,7 +21,7 @@ npm install isodoodle
 ```typescript
 import { isodoodle } from 'isodoodle';
 
-const diamond = isodoodle({ scale: 40, fill: 'teal' })
+const diamond = isodoodle({ scale: 40, stroke: 'rgb(29, 30, 32)', fill: 'rgb(218,218,219)' })
   .ne(2).se(2).sw(2).nw(2)
   .toSvgString();
 
@@ -30,21 +30,80 @@ document.body.innerHTML = diamond;
 Gives:
 
 <svg data-iso-scale="40" data-iso-padding="10" data-iso-origin-x="10" data-iso-origin-y="50" xmlns="http://www.w3.org/2000/svg" width="158.56406460551017" height="100" viewBox="0 0 158.56406460551017 100">
-  <path d="M 10.00 50.00 L 79.28 10.00 L 148.56 50.00 L 79.28 90.00 L 10.00 50.00" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="teal" />
+  <path d="M 10.00 50.00 L 79.28 10.00 L 148.56 50.00 L 79.28 90.00 L 10.00 50.00" stroke="rgb(29, 30, 32)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" fill="rgb(218,218,219)" />
 </svg>
 
 ## Isometric grid
 
 The library uses standard coordinates for an isometric grid:
 <svg data-iso-scale="20" data-iso-padding="10" data-iso-origin-x="217.84609690826525" data-iso-origin-y="250" xmlns="http://www.w3.org/2000/svg" width="500" height="540" viewBox="0 -10 500 620">
-  <path stroke="teal" d="M 217.85 250.00 L 391.05 150.00 L 373.73 140.00 M 391.05 150.00 L 391.05 170.00 M 217.85 250.00 L 217.85 50.00 L 200.53 60.00 M 217.85 50.00 L 235.17 60.00 M 217.85 250.00 L 44.64 150.00 L 61.96 140.00 M 44.64 150.00 L 44.64 170.00 M 217.85 250.00 L 44.64 350.00 L 44.64 330.00 M 44.64 350.00 L 61.96 360.00 M 217.85 250.00 L 217.85 450.00 L 200.53 440.00 M 217.85 450.00 L 235.17 440.00 M 217.85 250.00 L 391.05 350.00 L 391.05 330.00 M 391.05 350.00 L 373.73 360.00" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" fill="none" />
-  <text x="217.85" y="20" font-size="32" fill="teal" text-anchor="middle" dominant-baseline="auto">N</text>
-  <text x="417.03" y="135" font-size="32" fill="teal" text-anchor="start" dominant-baseline="auto">NE</text>
-  <text x="417.03" y="365" font-size="32" fill="teal" text-anchor="start" dominant-baseline="hanging">SE</text>
-  <text x="217.85" y="480" font-size="32" fill="teal" text-anchor="middle" dominant-baseline="hanging">S</text>
-  <text x="18.66" y="365" font-size="32" fill="teal" text-anchor="end" dominant-baseline="hanging">SW</text>
-  <text x="18.66" y="135" font-size="32" fill="teal" text-anchor="end" dominant-baseline="auto">NW</text>
+  <path stroke="rgb(155, 156, 157)" d="M 217.85 250.00 L 391.05 150.00 L 373.73 140.00 M 391.05 150.00 L 391.05 170.00 M 217.85 250.00 L 217.85 50.00 L 200.53 60.00 M 217.85 50.00 L 235.17 60.00 M 217.85 250.00 L 44.64 150.00 L 61.96 140.00 M 44.64 150.00 L 44.64 170.00 M 217.85 250.00 L 44.64 350.00 L 44.64 330.00 M 44.64 350.00 L 61.96 360.00 M 217.85 250.00 L 217.85 450.00 L 200.53 440.00 M 217.85 450.00 L 235.17 440.00 M 217.85 250.00 L 391.05 350.00 L 391.05 330.00 M 391.05 350.00 L 373.73 360.00" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" fill="none" />
+  <text x="217.85" y="20" font-size="32" fill="rgb(155, 156, 157)" text-anchor="middle" dominant-baseline="auto">N</text>
+  <text x="417.03" y="135" font-size="32" fill="rgb(155, 156, 157)" text-anchor="start" dominant-baseline="auto">NE</text>
+  <text x="417.03" y="365" font-size="32" fill="rgb(155, 156, 157)" text-anchor="start" dominant-baseline="hanging">SE</text>
+  <text x="217.85" y="480" font-size="32" fill="rgb(155, 156, 157)" text-anchor="middle" dominant-baseline="hanging">S</text>
+  <text x="18.66" y="365" font-size="32" fill="rgb(155, 156, 157)" text-anchor="end" dominant-baseline="hanging">SW</text>
+  <text x="18.66" y="135" font-size="32" fill="rgb(155, 156, 157)" text-anchor="end" dominant-baseline="auto">NW</text>
 </svg>
+
+## API
+
+### Factory Function
+
+```typescript
+isodoodle(options?: IsoDoodleOptions): IsoDoodle
+```
+
+Creates a new IsoDoodle instance.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `scale` | number | 20 | Pixels per unit |
+| `stroke` | string | '#000' | Stroke color |
+| `strokeLinecap` | 'butt' \| 'round' \| 'square' | 'round' | Stroke linecap |
+| `strokeLinejoin` | 'miter' \| 'round' \| 'bevel' | 'round' | Stroke linejoin |
+| `strokeWidth` | number | 1 | Stroke width |
+```markdown
+![Isodoodle wordmark spelling ISODOODLE](assets/isodoodle.svg)
+
+**Draw isometric graphics with code.**
+
+[**Try it →**](https://isodoodle.netlify.app)
+
+---
+
+A TypeScript library for creating isometric drawings. Chain simple direction commands and get perfect SVG output every time.
+
+Isodoodle generates clean, minimal SVG markup. No canvas. No WebGL. No runtime.
+
+## Installation
+
+```bash
+npm install isodoodle
+```
+
+## Quick Start
+
+```typescript
+import { isodoodle } from 'isodoodle';
+
+const diamond = isodoodle({ scale: 40, fill: 'teal' })
+  .ne(2).se(2).sw(2).nw(2)
+  .toSvgString();
+
+document.body.innerHTML = diamond;
+```
+Gives:
+
+![Diamond example](assets/diamond.svg)
+
+## Isometric grid
+
+The library uses standard coordinates for an isometric grid:
+
+![Isometric grid](assets/isometric-grid.svg)
 
 ## API
 
@@ -106,3 +165,5 @@ The origin (0,0,0) is where the path was started from.
 ## License
 
 MIT
+
+````
